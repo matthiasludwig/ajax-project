@@ -55,7 +55,7 @@ function loadData() {
         var items = [];
         for (var i = 0, j = data.length; i < j; i++)
         {
-            items.push("<li><a href=" + data[3][i] + "'>" + data[1][i] + "</a></li>")
+            items.push("<li><a href='https://en.wikipedia.org/wiki/" + data[1][i] + "'>" + data[1][i] + "</a></li>")
         }
         $wikiElem.append(items);
         clearTimeout(wikiTimeOut);
