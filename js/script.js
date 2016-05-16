@@ -24,7 +24,8 @@ function loadData() {
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     url += '?' + $.param({
       'api-key': "ac16f8df9a34441fa322642dbb19ed02",
-      'q' : cityName
+      'q' : cityName,
+      'sort' : "newest"
     });
 
     $.getJSON( url, function( data ) {
@@ -34,7 +35,7 @@ function loadData() {
       }
       $nytElem.append(items);
   });
-
+  $nytHeaderElem.text("This is what the NYT has for " + cityName);
 
     return false;
 };
