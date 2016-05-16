@@ -34,8 +34,14 @@ function loadData() {
           items.push("<li class='article'><a href=" + data.response.docs[i].web_url + "'>" + data.response.docs[i].headline.main + "</a><p>" + data.response.docs[i].lead_paragraph + "</p></li>");
       }
       $nytElem.append(items);
+      $nytHeaderElem.text("This is what the NYT has for " + cityName);
+  })
+  .fail(function(e) {
+      $nytHeaderElem.text("Unfortunately the NYT is not accesible at the moment. Please try again later!");
   });
-  $nytHeaderElem.text("This is what the NYT has for " + cityName);
+
+    //load wikipedia articles
+    
 
     return false;
 };
