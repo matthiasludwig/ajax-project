@@ -35,13 +35,31 @@ function loadData() {
       }
       $nytElem.append(items);
       $nytHeaderElem.text("This is what the NYT has for " + cityName);
-  })
-  .fail(function(e) {
-      $nytHeaderElem.text("Unfortunately the NYT is not accesible at the moment. Please try again later!");
-  });
+      })
+      .fail(function(e) {
+          $nytHeaderElem.text("Unfortunately the NYT is not accesible at the moment. Please try again later!");
+      });
 
     //load wikipedia articles
-    
+
+    var wikiTimeOut = setTimeout(function (){
+        $wikiElem.text("Failed to get wikipedia articles. Please try again later!");
+    }, 8000);
+
+    $.ajax({
+    url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + cityName + "&format=json",
+    type: "GET",
+    dataType: 'jsonp',
+    })
+    .done(function(data) {
+        var items = [];
+        for (var i = 0, j = data.length; i < j; i++)
+        {
+            items.push("<li><a href=" + data[3][i] + "'>" + data[1][i] + "</a></li>")
+        }
+        $wikiElem.append(items);
+        clearTimeout(wikiTimeOut);
+    });
 
     return false;
 };
