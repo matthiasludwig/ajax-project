@@ -20,9 +20,7 @@ function loadData() {
 
     $greeting.text("So you want to live at " + addressName);
 
-    //load NYT
-
-    // Built by LucyBot. www.lucybot.com
+    //load NYT articles
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     url += '?' + $.param({
       'api-key': "ac16f8df9a34441fa322642dbb19ed02",
@@ -31,15 +29,11 @@ function loadData() {
 
     $.getJSON( url, function( data ) {
       var items = [];
-      $.each( data, function( key, val ) {
-        items.push( "<li id='" + key + "'>" + val + "</li>" );
-      });
-
-    $( $nytHeaderElem, {
-        "class": ".article",
-        html: items.join( "" )
-        }).appendTo( $nytHeaderElem );
-    });
+      for (var i = 0, j = data.response.docs.length; i < j; i++){
+          items.push("<li class='article'><a href=" + data.response.docs[i].web_url + "'>" + data.response.docs[i].headline.main + "</a><p>" + data.response.docs[i].lead_paragraph + "</p></li>");
+      }
+      $nytElem.append(items);
+  });
 
 
     return false;
