@@ -1,4 +1,3 @@
-
 function loadData() {
 
     var $body = $('body');
@@ -31,7 +30,7 @@ function loadData() {
     $.getJSON( url, function( data ) {
       var items = [];
       for (var i = 0, j = data.response.docs.length; i < j; i++){
-          items.push("<li class='article'><a href=" + data.response.docs[i].web_url + "'>" + data.response.docs[i].headline.main + "</a><p>" + data.response.docs[i].lead_paragraph + "</p></li>");
+          items.push("<li class='article'><a href=" + data.response.docs[i].web_url + ">" + data.response.docs[i].headline.main + "</a><p>" + data.response.docs[i].lead_paragraph + "</p></li>");
       }
       $nytElem.append(items);
       $nytHeaderElem.text("This is what the NYT has for " + cityName);
